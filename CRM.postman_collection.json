@@ -1,0 +1,1690 @@
+{
+	"info": {
+		"_postman_id": "9d432457-c5e0-40aa-b751-9aefd7e5086a",
+		"name": "CRM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "52762407",
+		"_collection_link": "https://deep-patel-ecf54241-1954170.postman.co/workspace/deep-patel's-Workspace~46c9743e-15a1-4533-85f6-e7e55af86029/collection/52762407-9d432457-c5e0-40aa-b751-9aefd7e5086a?action=share&source=collection_link&creator=52762407"
+	},
+	"item": [
+		{
+			"name": "Contact",
+			"item": [
+				{
+					"name": "Create Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response",
+									"let res = pm.response.json();",
+									"",
+									"// Extract contact id",
+									"let contactId = res.response.result.id;",
+									"",
+									"// Store in selected environment",
+									"pm.collectionVariables.set(\"contact_id\", contactId);",
+									"",
+									"// Log for confirmation",
+									"console.log(\"Contact ID stored in environment:\", contactId);",
+									"",
+									"pm.test(\"Contact successfully created\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 2000 ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en;q=0.9,en-US;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Token {{token}}"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://ui.cogmento.com"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://ui.cogmento.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Microsoft Edge\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Linux\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"meet\",\n    \"last_name\": \"patel\",\n    \"tags\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/contacts/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contacts",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Contact fatched\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 2 seconds\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en;q=0.9,en-US;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Token {{token}}"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://ui.cogmento.com"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://ui.cogmento.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Microsoft Edge\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Linux\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/contacts/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contacts",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Contact updated successfully\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 2 seconds\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let body = JSON.parse(pm.request.body.raw);",
+									"",
+									"// Regex patterns",
+									"let phonePattern = /^[0-9]{10}$/;",
+									"",
+									"// Validate Phone",
+									"if (!phonePattern.test(body.phone[0].value)) {",
+									"    throw new Error(\"Invalid Phone Number Format (must be 10 digits)\");",
+									"}",
+									"",
+									"console.log(\"Validation Passed\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en;q=0.9,en-US;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Token {{token}}"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://ui.cogmento.com"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://ui.cogmento.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Microsoft Edge\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Linux\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"meet\",\n    \"last_name\": \"patel\",\n    \"id\": \"e921df88-af73-46e2-8c2d-5058b45b60e5\",\n    \"account_id\": \"2ff126a1-76dc-4439-89a6-d9dd401fb9de\",\n    \"template_id\": null,\n    \"created_at\": \"2026-03-05T10:31:38Z\",\n    \"last_modified\": \"2026-03-05T10:31:38Z\",\n    \"created_by\": {\n        \"id\": \"d2464757-1684-4589-b01e-545ebf2d7ada\",\n        \"email\": \"henish.trada@simformsolutions.com\",\n        \"name\": \"Henish Trada\",\n        \"notification_opt_in\": true\n    },\n    \"aux_id\": null,\n    \"aux_source\": null,\n    \"aux_source_name\": null,\n    \"private\": false,\n    \"acl\": [],\n    \"tags\": [],\n    \"rating\": 0,\n    \"flags\": {\n        \"new\": false,\n        \"updated\": true,\n        \"email_received\": false,\n        \"task_assigned\": false,\n        \"case_assigned\": false,\n        \"event_assigned\": false,\n        \"call_assigned\": false\n    },\n    \"_uri\": \"https://ui.freecrm.com/contacts/e921df88-af73-46e2-8c2d-5058b45b60e5\",\n    \"_type\": \"Contact\",\n    \"last_call\": null,\n    \"last_event\": null,\n    \"middle_name\": null,\n    \"full_name\": \"meet patel\",\n    \"name\": \"meet patel\",\n    \"description\": null,\n    \"timezone\": null,\n    \"do_not_call\": false,\n    \"do_not_text\": false,\n    \"do_not_email\": false,\n    \"image\": null,\n    \"addresses\": [],\n    \"company\": {},\n    \"local_time\": null,\n    \"access\": {\n        \"private\": false,\n        \"users\": null\n    },\n    \"notes\": [],\n    \"alerts\": [],\n    \"tasks\": [],\n    \"cases\": [],\n    \"deals\": [],\n    \"calls\": [],\n    \"events\": [],\n    \"documents\": [],\n    \"sms\": [],\n    \"campaigns\": [],\n    \"credentials\": [],\n    \"whatsapp\": [],\n    \"submissions\": [],\n    \"invoices\": [],\n    \"phone\": [\n        {\n            \"channel_type\": \"Phone\",\n            \"value\": \"8200079192\",\n            \"name\": \"\",\n            \"hint\": \"IN\",\n            \"default\": false\n        }\n    ],\n    \"_template_id\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/contacts/{{contact_id}}/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contacts",
+								"{{contact_id}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Contact successfully deleted.\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 2 seconds\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+									"});",
+									"pm.collectionVariables.unset(\"contact_id\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en;q=0.9,en-US;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Token {{token}}"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://ui.cogmento.com"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://ui.cogmento.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Microsoft Edge\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Linux\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/contacts/{{contact_id}}/?purge=false",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contacts",
+								"{{contact_id}}",
+								""
+							],
+							"query": [
+								{
+									"key": "purge",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "Create Company",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"company_id\", pm.response.json().response.result.id);",
+									"",
+									"pm.test(\"Company successfully created\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 2000 ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en;q=0.9,en-US;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Token 5d360caba64cc55221f3d3fd4750736f048080e8"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://ui.cogmento.com"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://ui.cogmento.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Microsoft Edge\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Linux\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"xyz\",\n    \"tags\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/companies/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read Company",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    pm.environment.set(\"item_exists\", true);",
+									"} else if (pm.response.code === 404) {",
+									"    pm.environment.set(\"itemExists\", false);",
+									"}",
+									"",
+									"let companyId = pm.collectionVariables.get(\"company_id\");",
+									"",
+									"pm.test(\"Company with ID \" + companyId + \" exists\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 2 seconds\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+									"});",
+									"",
+									"pm.test(\"Schema validated successfully\", function () {",
+									"    const schema = {",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"response\": {",
+									"      \"type\": \"object\",",
+									"      \"properties\": {",
+									"        \"success\": {",
+									"          \"type\": \"boolean\"",
+									"        },",
+									"        \"version\": {",
+									"          \"type\": \"string\"",
+									"        },",
+									"        \"results\": {",
+									"          \"type\": \"object\",",
+									"          \"properties\": {",
+									"            \"id\": {",
+									"              \"type\": \"string\"",
+									"            },",
+									"            \"account_id\": {",
+									"              \"type\": \"string\"",
+									"            },",
+									"            \"template_id\": {",
+									"              \"type\": \"null\"",
+									"            },",
+									"            \"created_at\": {",
+									"              \"type\": \"string\"",
+									"            },",
+									"            \"last_modified\": {",
+									"              \"type\": \"string\"",
+									"            },",
+									"            \"created_by\": {",
+									"              \"type\": \"object\",",
+									"              \"properties\": {",
+									"                \"id\": {",
+									"                  \"type\": \"string\"",
+									"                },",
+									"                \"email\": {",
+									"                  \"type\": \"string\"",
+									"                },",
+									"                \"name\": {",
+									"                  \"type\": \"string\"",
+									"                },",
+									"                \"notification_opt_in\": {",
+									"                  \"type\": \"boolean\"",
+									"                }",
+									"              },",
+									"              \"required\": [",
+									"                \"id\",",
+									"                \"email\",",
+									"                \"name\",",
+									"                \"notification_opt_in\"",
+									"              ]",
+									"            },",
+									"            \"aux_id\": {",
+									"              \"type\": \"null\"",
+									"            },",
+									"            \"aux_source\": {",
+									"              \"type\": \"null\"",
+									"            },",
+									"            \"aux_source_name\": {",
+									"              \"type\": \"null\"",
+									"            },",
+									"            \"private\": {",
+									"              \"type\": \"boolean\"",
+									"            },",
+									"            \"acl\": {",
+									"              \"type\": \"array\",",
+									"              \"items\": {}",
+									"            },",
+									"            \"tags\": {",
+									"              \"type\": \"array\",",
+									"              \"items\": {}",
+									"            },",
+									"            \"rating\": {",
+									"              \"type\": \"integer\"",
+									"            },",
+									"            \"flags\": {",
+									"              \"type\": \"object\",",
+									"              \"properties\": {",
+									"                \"new\": {",
+									"                  \"type\": \"boolean\"",
+									"                },",
+									"                \"updated\": {",
+									"                  \"type\": \"boolean\"",
+									"                },",
+									"                \"email_received\": {",
+									"                  \"type\": \"boolean\"",
+									"                },",
+									"                \"task_assigned\": {",
+									"                  \"type\": \"boolean\"",
+									"                },",
+									"                \"case_assigned\": {",
+									"                  \"type\": \"boolean\"",
+									"                },",
+									"                \"event_assigned\": {",
+									"                  \"type\": \"boolean\"",
+									"                },",
+									"                \"call_assigned\": {",
+									"                  \"type\": \"boolean\"",
+									"                }",
+									"              },",
+									"              \"required\": [",
+									"                \"new\",",
+									"                \"updated\",",
+									"                \"email_received\",",
+									"                \"task_assigned\",",
+									"                \"case_assigned\",",
+									"                \"event_assigned\",",
+									"                \"call_assigned\"",
+									"              ]",
+									"            },",
+									"            \"_uri\": {",
+									"              \"type\": \"string\"",
+									"            },",
+									"            \"_type\": {",
+									"              \"type\": \"string\"",
+									"            },",
+									"            \"name\": {",
+									"              \"type\": \"string\"",
+									"            },",
+									"            \"description\": {",
+									"              \"type\": \"null\"",
+									"            },",
+									"            \"url\": {",
+									"              \"type\": \"null\"",
+									"            },",
+									"            \"image\": {",
+									"              \"type\": \"null\"",
+									"            },",
+									"            \"channels\": {",
+									"              \"type\": \"array\",",
+									"              \"items\": {}",
+									"            },",
+									"            \"addresses\": {",
+									"              \"type\": \"array\",",
+									"              \"items\": {}",
+									"            },",
+									"            \"access\": {",
+									"              \"type\": \"object\",",
+									"              \"properties\": {",
+									"                \"private\": {",
+									"                  \"type\": \"boolean\"",
+									"                },",
+									"                \"users\": {",
+									"                  \"type\": \"null\"",
+									"                }",
+									"              },",
+									"              \"required\": [",
+									"                \"private\",",
+									"                \"users\"",
+									"              ]",
+									"            },",
+									"            \"notes\": {",
+									"              \"type\": \"array\",",
+									"              \"items\": {}",
+									"            },",
+									"            \"alerts\": {",
+									"              \"type\": \"array\",",
+									"              \"items\": {}",
+									"            },",
+									"            \"contacts\": {",
+									"              \"type\": \"array\",",
+									"              \"items\": {}",
+									"            },",
+									"            \"cases\": {",
+									"              \"type\": \"array\",",
+									"              \"items\": {}",
+									"            },",
+									"            \"documents\": {",
+									"              \"type\": \"array\",",
+									"              \"items\": {}",
+									"            },",
+									"            \"deals\": {",
+									"              \"type\": \"array\",",
+									"              \"items\": {}",
+									"            },",
+									"            \"tasks\": {",
+									"              \"type\": \"array\",",
+									"              \"items\": {}",
+									"            },",
+									"            \"calls\": {",
+									"              \"type\": \"array\",",
+									"              \"items\": {}",
+									"            },",
+									"            \"events\": {",
+									"              \"type\": \"array\",",
+									"              \"items\": {}",
+									"            },",
+									"            \"invoices\": {",
+									"              \"type\": \"array\",",
+									"              \"items\": {}",
+									"            }",
+									"          },",
+									"          \"required\": [",
+									"            \"id\",",
+									"            \"account_id\",",
+									"            \"template_id\",",
+									"            \"created_at\",",
+									"            \"last_modified\",",
+									"            \"created_by\",",
+									"            \"aux_id\",",
+									"            \"aux_source\",",
+									"            \"aux_source_name\",",
+									"            \"private\",",
+									"            \"acl\",",
+									"            \"tags\",",
+									"            \"rating\",",
+									"            \"flags\",",
+									"            \"_uri\",",
+									"            \"_type\",",
+									"            \"name\",",
+									"            \"description\",",
+									"            \"url\",",
+									"            \"image\",",
+									"            \"channels\",",
+									"            \"addresses\",",
+									"            \"access\",",
+									"            \"notes\",",
+									"            \"alerts\",",
+									"            \"contacts\",",
+									"            \"cases\",",
+									"            \"documents\",",
+									"            \"deals\",",
+									"            \"tasks\",",
+									"            \"calls\",",
+									"            \"events\",",
+									"            \"invoices\"",
+									"          ]",
+									"        }",
+									"      },",
+									"      \"required\": [",
+									"        \"success\",",
+									"        \"version\",",
+									"        \"results\"",
+									"      ]",
+									"    },",
+									"    \"process_time\": {",
+									"      \"type\": \"number\"",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"response\",",
+									"    \"process_time\"",
+									"  ]",
+									"}",
+									"",
+									"pm.response.to.have.jsonSchema(schema);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"packages": {},
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en;q=0.9,en-US;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Token {{token}}"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://ui.cogmento.com"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://ui.cogmento.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Microsoft Edge\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Linux\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/companies/{{company_id}}/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"{{company_id}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update  Company",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Company updated successfully\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 2 seconds\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en;q=0.9,en-US;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Token {{token}}"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://ui.cogmento.com"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://ui.cogmento.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Microsoft Edge\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Linux\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"TCS-1\",\"id\":\"{{company_id}}\",\"account_id\":\"2ff126a1-76dc-4439-89a6-d9dd401fb9de\",\"template_id\":null,\"created_at\":\"2026-03-05T11:54:52Z\",\"last_modified\":\"2026-03-05T11:54:52Z\",\"created_by\":{\"id\":\"d2464757-1684-4589-b01e-545ebf2d7ada\",\"email\":\"henish.trada@simformsolutions.com\",\"name\":\"Henish Trada\",\"notification_opt_in\":true},\"aux_id\":null,\"aux_source\":null,\"aux_source_name\":null,\"private\":false,\"acl\":[],\"tags\":[],\"rating\":0,\"flags\":{\"new\":false,\"updated\":true,\"email_received\":false,\"task_assigned\":false,\"case_assigned\":false,\"event_assigned\":false,\"call_assigned\":false},\"_uri\":\"https://ui.freecrm.com/companies/6ee3c8f3-75ca-46ea-b6f7-70c05ccb7053\",\"_type\":\"Company\",\"description\":null,\"url\":null,\"image\":null,\"channels\":[],\"addresses\":[],\"access\":{\"private\":false,\"users\":null},\"notes\":[],\"alerts\":[],\"contacts\":[],\"cases\":[],\"documents\":[],\"deals\":[],\"tasks\":[],\"calls\":[],\"events\":[],\"invoices\":[]}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/companies/{{company_id}}/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"{{company_id}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete  Company",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let companyId = pm.collectionVariables.get(\"company_id\");",
+									"pm.test(\"Company with ID \" + companyId + \" successfully deleted.\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 2 seconds\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+									"});",
+									"pm.collectionVariables.unsetset(\"company_id\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en;q=0.9,en-US;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Token {{token}}"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://ui.cogmento.com"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://ui.cogmento.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Microsoft Edge\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Linux\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/companies/{{company_id}}/?purge=false",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"{{company_id}}",
+								""
+							],
+							"query": [
+								{
+									"key": "purge",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Negative_Testcases",
+			"item": [
+				{
+					"name": "Invalid Parameters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404 - Resource not found\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en;q=0.9,en-US;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Token {{token}}"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://ui.cogmento.com"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://ui.cogmento.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Microsoft Edge\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Linux\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"title\":\"Complete Assignment - 2\",\"tags\":[]}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks/@?/////????dsfgsdg345097654678",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"@"
+							],
+							"query": [
+								{
+									"key": "/////????dsfgsdg345097654678",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid company name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404 - Company not found\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en;q=0.9,en-US;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Token {{token}}"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://ui.cogmento.com"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://ui.cogmento.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Microsoft Edge\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Linux\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/companies/name/?name=ggle-112274",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								"name",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "ggle-112274"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Request without Header Authorization",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Failed to authenticate\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en;q=0.9,en-US;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Token {{token}}",
+								"disabled": true
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://ui.cogmento.com"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://ui.cogmento.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Microsoft Edge\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Linux\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0"
+							},
+							{
+								"key": "Cookie",
+								"value": "csrftoken=5BMqkYjNqKFH1BjWcUQCfChjSO308Ud2; sessionid=l4b01v5nncdphnbte5eueq7kh9gkcph2"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/companies/?start=0&filter=null&sort=&export=false",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"companies",
+								""
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "filter",
+									"value": "null"
+								},
+								{
+									"key": "sort",
+									"value": ""
+								},
+								{
+									"key": "export",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"token\", pm.response.json().response.token);",
+							"",
+							"pm.test(\"Successful Authentication\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-GB,en;q=0.9,en-US;q=0.8"
+					},
+					{
+						"key": "authorization",
+						"value": "Token null"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://ui.cogmento.com"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://ui.cogmento.com/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Microsoft Edge\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Linux\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"deep.patel@simformsolutions.com\",\"password\":\"Dpatel@1\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/auth/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"auth",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.unset(\"token\");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Linux\""
+					},
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Microsoft Edge\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "cross-site"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty"
+					},
+					{
+						"key": "host",
+						"value": "api.freecrm.com"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/auth/logout/?purge=true",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"auth",
+						"logout",
+						""
+					],
+					"query": [
+						{
+							"key": "purge",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "contact_id",
+			"value": ""
+		}
+	]
+}
