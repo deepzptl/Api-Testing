@@ -1,4 +1,14 @@
 import { defineConfig } from '@playwright/test';
+import dotenv from 'dotenv';
+import path from 'path';
+
+dotenv.config({ path: path.resolve(process.cwd(), process.env.ENV_FILE || '.env') });
+
+const environment = (process.env.TARGET_ENV || 'qa').toLowerCase();
+const baseURL =
+  environment === 'prod'
+    ? process.env.BASE_URL_PROD || ''
+    : process.env.BASE_URL_QA || '';
 
 export default defineConfig({
   testDir: './src/tests',
@@ -7,7 +17,7 @@ export default defineConfig({
   workers: 1,
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    baseURL: process.env.BASE_URL || 'http://127.0.0.1:4100',
+    baseURL,
     extraHTTPHeaders: {
       Accept: 'application/json, text/plain, */*'
     }

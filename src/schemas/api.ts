@@ -12,20 +12,22 @@ export const ContactRecordSchema = ContactPayloadSchema.extend({
 
 export const ContactResponseSchema = z.object({
   response: z.object({
-    result: ContactRecordSchema
-  })
-});
+    result: ContactRecordSchema.optional(),
+    results: ContactRecordSchema.optional()
+  }).passthrough()
+}).passthrough();
 
 export const ContactsListResponseSchema = z.object({
   response: z.object({
-    result: z.array(ContactRecordSchema)
-  })
-});
+    result: z.array(ContactRecordSchema).optional(),
+    results: z.array(ContactRecordSchema).optional()
+  }).passthrough()
+}).passthrough();
 
 export const CompanyPayloadSchema = z.object({
   name: z.string(),
   industry: z.string().optional(),
-  phone: z.string().optional()
+  phone: z.any().optional()
 });
 
 export const CompanyRecordSchema = CompanyPayloadSchema.extend({
@@ -34,15 +36,17 @@ export const CompanyRecordSchema = CompanyPayloadSchema.extend({
 
 export const CompanyResponseSchema = z.object({
   response: z.object({
-    result: CompanyRecordSchema
-  })
-});
+    result: CompanyRecordSchema.optional(),
+    results: CompanyRecordSchema.optional()
+  }).passthrough()
+}).passthrough();
 
 export const CompaniesListResponseSchema = z.object({
   response: z.object({
-    result: z.array(CompanyRecordSchema)
-  })
-});
+    result: z.array(CompanyRecordSchema).optional(),
+    results: z.array(CompanyRecordSchema).optional()
+  }).passthrough()
+}).passthrough();
 
 export const AuthPayloadSchema = z.object({
   username: z.string(),

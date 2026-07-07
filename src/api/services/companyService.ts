@@ -9,37 +9,55 @@ import {
 
 export class CompanyService {
   private readonly api: ApiClient;
+  private readonly baseUrl: string;
 
-  constructor(request: APIRequestContext) {
+  constructor(request: APIRequestContext, baseUrl?: string) {
     this.api = new ApiClient(request);
+    this.baseUrl = baseUrl ?? '';
+  }
+
+  private normalizeSingleResponse(body: unknown) {
+    const parsed = CompanyResponseSchema.parse(body);
+    const record = parsed.response.result ?? parsed.response.results;
+    return {
+      ...parsed,
+      response: {
+        ...parsed.response,
+        result: record
+      }
+    };
   }
 
   async create(payload: CompanyPayload) {
     CompanyPayloadSchema.parse(payload);
-    const result = await this.api.post('/companies/', payload);
+    const url = this.baseUrl ? `${this.baseUrl}/companies/` : '/companies/';
+    const result = await this.api.post(url, payload);
     return {
       ...result,
-      body: result.body ? CompanyResponseSchema.parse(result.body) : null
+      body: result.body ? this.normalizeSingleResponse(result.body) : null
     };
   }
 
   async get(id: string) {
-    const result = await this.api.get(`/companies/${id}/`);
+    const url = this.baseUrl ? `${this.baseUrl}/companies/${id}/` : `/companies/${id}/`;
+    const result = await this.api.get(url);
     return {
       ...result,
-      body: result.body ? CompanyResponseSchema.parse(result.body) : null
+      body: result.body ? this.normalizeSingleResponse(result.body) : null
     };
   }
 
   async update(id: string, payload: Partial<CompanyPayload>) {
-    const result = await this.api.post(`/companies/${id}/`, payload);
+    const url = this.baseUrl ? `${this.baseUrl}/companies/${id}/` : `/companies/${id}/`;
+    const result = await this.api.post(url, payload);
     return {
       ...result,
-      body: result.body ? CompanyResponseSchema.parse(result.body) : null
+      body: result.body ? this.normalizeSingleResponse(result.body) : null
     };
   }
 
   async delete(id: string) {
-    return this.api.delete(`/companies/${id}/?purge=false`);
+    const url = this.baseUrl ? `${this.baseUrl}/companies/${id}/?purge=false` : `/companies/${id}/?purge=false`;
+    return this.api.delete(url);
   }
 }
